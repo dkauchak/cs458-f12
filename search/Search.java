@@ -6,6 +6,7 @@ import java.util.Hashtable;
 
 import search.data.DocumentReader;
 import search.data.TDTReader;
+import search.data.WebDocumentReader;
 
 /**
  * A search class that will allow us to run queries against the TDT corpus.
@@ -18,6 +19,7 @@ public class Search{
 	
 	private Index index;
 	private Hashtable<Integer,Document> id2doc = null;
+	private Hashtable<Integer,WebResultData> id2web = null;
 	private Tokenizer tokenizer;
 	private TokenProcessor tokenProcessor;
 	
@@ -43,6 +45,28 @@ public class Search{
 		
 		system.run();
 	}
+	
+	/*
+	// Use this main function if you want to run with a web data file
+	public static void main(String args[]){
+		String web_data_file = "/Users/dkauchak/classes/cs458/final_project/code/cs458-f12/data/web_data.test";
+		
+		WebDocumentReader reader = new WebDocumentReader(web_data_file);
+		ImprovedTokenizer tokenizer = new ImprovedTokenizer();
+		TokenProcessor processor = new TokenProcessor();				
+		processor.setLowercase(true);
+		reader.setTokenizer(tokenizer);
+		reader.setTokenProcessor(processor);
+
+		
+		WebDocumentReader reader2 = new WebDocumentReader(web_data_file);
+		reader2.setTokenizer(tokenizer);
+		reader2.setTokenProcessor(processor);
+		Search system = new Search(reader, reader2, tokenizer, processor,
+				Index.TERM_MODIFIER.l, Index.DOC_MODIFIER.t, Index.LENGTH_MODIFIER.c);
+
+		system.run();
+	}*/
 	
 	/**
 	 * Use this constructor if you want to have document IDs
@@ -89,7 +113,36 @@ public class Search{
 			id2doc.put(next.getDocID(), next);
 		}
 	}
+	
+	/**
+	 * Use this constructor if you want to have the actual document text returned
+	 * 
+	 * You should pass two instances of the reader, but that are of the same type
+	 * and read from the same file.
+	 * NOTE: For now, this is a bit of a hack, but it was the best I could think to do without
+	 * making life too complicated
+	 * 
+	 * @param reader
+	 * @param reader2
+	 * @param termModifier
+	 * @param docModifier
+	 * @param lengthModifier
+	 */
+	public Search(WebDocumentReader reader, WebDocumentReader reader2,
+			Tokenizer tokenizer, TokenProcessor tokenProcessor,
+			Index.TERM_MODIFIER termModifier, Index.DOC_MODIFIER docModifier, Index.LENGTH_MODIFIER lengthModifier){
+		this.tokenizer = tokenizer;
+		this.tokenProcessor = tokenProcessor;
 		
+		index = new Index(reader, termModifier, docModifier, lengthModifier);
+		id2web = new Hashtable<Integer,WebResultData>();
+		
+		while( reader2.hasNext() ){
+			WebDocument next = (WebDocument)reader2.next();
+			id2web.put(next.getDocID(), new WebResultData(next.getTitle(), next.getUrl(), next.getText()));
+		}
+	}
+			
 	/**
 	 * Run the query interaction system.  The system
 	 * waits for a query to be issued and then prints out the result.
@@ -123,14 +176,21 @@ public class Search{
 					double[] scores = result.getScores();
 					
 					for( int i = 0; i < scores.length; i++ ){
-						if( id2doc == null ){
-							System.out.print(ids[i] + ":" + scores[i] + " ");
-						}else{
+						if( id2doc != null ){
 							System.out.println(id2doc.get(ids[i]));
+						}else if( id2web != null ){
+							WebResultData data = id2web.get(ids[i]);
+							
+							System.out.println(data.getTitle());
+							System.out.println(data.getUrl());
+							System.out.println();
+						}
+						else{
+							System.out.print(ids[i] + ":" + scores[i] + " ");
 						}
 					}
 				
-						System.out.println();
+					System.out.println();
 				}
 				
 				

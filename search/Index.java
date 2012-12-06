@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.ArrayList;
 
 import search.data.DocumentReader;
+import search.data.WebDocumentReader;
 
 
 /**
@@ -155,7 +156,7 @@ public class Index {
 			for( String token: doc.getText() ){
 				pairs.add(new docEntry(token, docID));
 			}
-
+			
 			if( docID % 100 == 0 ){
 				System.out.println(docID);
 			}
@@ -169,7 +170,7 @@ public class Index {
 	}
 
 	/**
-	 * Given a list of docEnty objects generate postings list for these entries
+	 * Given a list of docEnty objects generate postings lists for these entries
 	 * (the second step in creating the index)
 	 * 
 	 * @param pairs

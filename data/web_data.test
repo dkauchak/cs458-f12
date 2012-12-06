@@ -1,0 +1,151 @@
+<DOC>
+<TITLE>CS 458 - Information Retrieval- Fall 2012</TITLE>
+<URL>http://www.cs.middlebury.edu/~dkauchak/classes/cs458/</URL>
+Department of Computer Science
+Middlebury College
+CS 458 - Information Retrieval
+Fall 2012
+
+instructor: Dave Kauchak
+e-mail: [first_initial][last_name]@middlebury.edu
+office hours: MBH 635
+  M/W 2:45-3:45pm
+	  T 2-3pm
+		  Th 1-2pm
+			  and by appointment 
+				time: T/Th 11am-12:15
+				location: MBH 632
+				web page: http://www.cs.middlebury.edu/~dkauchak/classes/cs458/ (or go/cs458)
+				textbook:
+
+				Introduction to Information Retrieval (2008) [Available online]. Christopher D. Manning, Prabhakar Raghavan and Hinrich Schutze.
+				summary:
+				In this course we will explore how search engines work and will cover: basic text processing, index construction, text similarity, evaluation, and searching of other types of media. In addition, we will examine related application areas including language modeling, clustering, classification and e-commerce.
+
+				Other information:
+
+				administrivia
+				assignment submission
+				Announcements
+
+				The midterm is available and must be taken by Oct. 23rd at midnight
+				Final project specification
+				Schedule
+
+				Note: This is a tentative schedule and will likely change
+				Date	Topic	Reading	Assignment	Comments
+				9/11	admin, intro (ppt)	Ch. 1 except 1.2	homework 1	 
+				9/13	text preprocessing (ppt)	Ch. 2, 5.1	assignment 1	 
+				9/18	index construction (ppt)	Ch. 1.2, 4	homework 2	 
+				9/20	index compression (ppt)	Ch. 5	 	 
+				9/25	TF-IDF (ppt)	Ch. 6 except 6.4.4	assignment 2	 
+				9/27	faster TF-IDF (ppt)	Ch. 7, article 1, article 2	 	 
+				10/2	spelling corection (ppt)	Ch. 3.3, 3.4	 	 
+				10/4	evaluation (ppt)	Ch. 8	homework 3	 
+				10/9	relevance feedback/
+				query expansion (ppt)	Ch. 9	assignment 3
+				sample output	 
+				10/11	web search basics (ppt)	Ch. 19 except 19.3, article	 	 
+				10/16	Fall recess	 	 	 
+				10/18	detecting duplicates (ppt)	Ch. 20	 	 
+				10/23	link analysis (ppt)	Ch. 21	homework 4	 
+				10/25	text segmentation (ppt)	paper	 	 
+				10/30	audio processing (ppt)	paper	assignment 4	 
+				11/1	audio search (ppt)	paper	 	 
+				11/6	NO CLASS	paper	 	 
+				11/8	image search (ppt)
+				image processing (ppt)	paper	 	 
+				11/13	project discussion	 	 	Quiz!
+				11/15	text classification (ppt)	Ch. 13 except 13.5	 	 
+				11/20	text classification (ppt)
+				exercise	Ch. 14-14.6 except 14.2, 15-15.3	 	 
+				11/22	Thanksgiving	 	 	 
+				11/27	Paper discussion 1	Watson article	 	 
+				11/29	document modeling (ppt)	document modeling	 	 
+				12/4	Paper discussion 2	User activity paper	 	 
+				12/6	online advertising (ppt)	 	 	 
+				We will use our final exam slot for project material on Friday, December 14 7-10pm.
+</DOC>
+<DOC>
+<TITLE>David Kauchak's Home page</TITLE>
+<URL>http://www.cs.middlebury.edu/~dkauchak/</URL>
+
+	
+	David Kauchak
+
+	Assistant Professor
+	Computer Science Department
+	Middlebury College
+	635 McCardell Bicentennial Hall
+	Middlebury, VT 05753
+	(802) 443-5581
+	dkauchakmiddlebury edu
+
+	Fall office hours:
+	  M/W 2:45-3:45pm
+		  T 2-3pm
+			  Th 1-2pm
+				  and by appointment
+
+					My current schedule
+					Fall 2012 teaching:
+					  CS 150 - Computing for the Sciences
+						  CS 458 - Introduction to Information Retrieval
+
+							Older teaching:
+							  CS 150 - Computing for the Sciences - Fall 2011
+								  CS 302 - Algorithms and Complexity - Spring 2012
+									  CS 312 - Software Development - Spring 2012
+										  CS 457 - Natural Language Processing - Fall 2011
+											  CS 51 (Pomona) - Introduction to Computer Science - Fall 2010 - Spring 2010 - Fall 2009 (with Prof Chen)
+												  CS 62 (Pomona)- Data Structures and Advanced Programming - Spring 2011 (with Prof Bruce) - Spring 2010
+													  CS 151 (Pomona) - Artificial Intelligence - Fall 2010
+														  CS 159 (Pomona) - Natural Language Processing - Spring 2011
+															  CS 160 (Pomona) - Introduction to Information Retreival - Fall 2009
+																  CS 190 (Pomona) - Sr. Research Seminar - Fall 2010 (with Prof Bruce) - Fall 2009 (with Prof Sood)
+																	  Introduction to Algorithms and Data Structures (Stanford) - Summer 2009 - Summer 2008
+
+																		My main research interests lie at the intersection of natural language processing and machine learning. My current research has been focusing on text simplification, though I've also been interested in computer science educational research as well as applications in social networking and e-commerce.
+
+
+																		Resources for the paper "A Course-long Information Retrieval Project"
+
+																		We built a search engine called "Bursti" in Fall 09 in the information retrieval course (cs160). Check it out. To find out more about how it works see the white papers.
+
+																		Some fun in the Fall09 intro course studying strings. Less enthused 10 min. later :)
+
+																		Older projects
+
+																		Winter 2005: Statistical Machine Translation Tutorial Resources
+
+																		Useful software, data, etc
+																		Publications
+
+																		Gondy Leroy, James Endicott, Obay Mouradi, David Kauchak and Milissa Just (2012). Improving Perceived and Actual Text Difficulty for Health Information Consumers using Semi-Automated Methods. In American Medical Infomatics Association (AMIA) Fall Symposium.
+
+																		David Kauchak, Gondy Leroy and Will Coster (2012). A Systematic Grammatical Analysis of Easy and Difficult Medical Text. In American Medical Infomatics Association (AMIA) Fall Symposium (poster paper).
+
+																		William Coster and David Kauchak (2011). Learning to Simplify Sentences Using Wikipedia. In Proceedings of Text-To-Text Generation, ACL Workshop.
+
+																		William Coster and David Kauchak (2011). Simple English Wikipedia: A New Text Simplification Task. In Proceedings of ACL (short paper). Associated data.
+
+																		Guillermo Gomez-Hicks and David Kauchak (2011). Dynamic Game Difficulty Balancing for Backgammon. In Proceedings of ACM SouthEast.
+
+																		David Kauchak (2010). A Course-long Information Retrieval Project. In Proceedings of Symposium on Educational Advances in Artificial Intelligence (EAAI). Associated resources available.
+
+																		David Kauchak (2006). Contribution to Research on Machine Translation. Doctoral dissertation, University of California, San Diego.
+
+																		David Kauchak and Regina Barzilay (2006). Paraphrasing for Automatic Evaluation. In Proceedings of HLT-NAACL.
+
+																		Rasmus E. Madsen, David Kauchak and Charles Elkan (2005). Modeling Word Burstiness Using the Dirichlet Distribution. In Proceedings of the Twenty-Second International Conference on Machine Learning (ICML'05).
+
+																		David Kauchak and Francine Chen (2005). Feature-Based Segmentation of Narrative Documents. In Proc. of the ACL Workshop on Feature Engineering for Machine Learning in Natural Language Processing, 32-39.
+
+																		David Kauchak, Joseph Smarr and Charles Elkan (2004). Sources of Success for Boosted Wrapper Induction. In Journal of Machine Learning Research, 5, 499 - 527.
+
+																		David Kauchak and Sanjoy Dasgupta (2003). An Iterative Improvement Procedure for Hierarchical Clustering. In Advances in Neural Information Processing Systems (NIPS).
+
+																		David Kauchak and Charles Elkan (2003). Learning Rules to Improve a Machine Translation System . In Proceedings of the European Conference on Machine Learning (ECML).
+
+																		David Kauchak, Joseph Smarr and Charles Elkan (2002). Sources of Success for Information Extraction Methods. Technical Report No. CS2002-0696, UCSD.
+</DOC>
