@@ -18,9 +18,10 @@ public class Index {
 	public static enum TERM_MODIFIER {n, l, b};
 	public static enum DOC_MODIFIER {n, t};
 	public static enum LENGTH_MODIFIER {n, c};
+	public static int highListSize = 50;
 	
 	private int maxDocID;
-	private Hashtable<String,PostingsList> index;
+	private Hashtable<String,HighLowList> index;
 	
 	/**
 	* Creates a new index based on the documents supplied by the document reader.
@@ -35,7 +36,7 @@ public class Index {
 			LENGTH_MODIFIER lengthModifier){
 		
 		index = combinePostings(collectEntries(reader));
-		normalizeIndex(termModifier, docModifier, lengthModifier);
+		normalizeIndex(termModifier, docModifier, lengthModifier, highListSize);
 	}
 	
 	/**
@@ -120,15 +121,15 @@ public class Index {
 				// get the postings list
 				if( entry.isNegated() ){
 					if( index.containsKey(entry.getTerm()) ){
-						process.add(PostingsList.not(index.get(entry.getTerm()), maxDocID));
+						process.add(HighLowList.not(index.get(entry.getTerm()), maxDocID));
 					}else{
-						process.add(PostingsList.not(new PostingsList(), maxDocID));
+						process.add(HighLowList.not(new HighLowList(), maxDocID));
 					}
 				}else{
 					if( index.containsKey(entry.getTerm()) ){
 						process.add(index.get(entry.getTerm()));
 					}else{
-						process.add(new PostingsList());
+						process.add(new HighLowList());
 					}
 				}
 			}
@@ -176,16 +177,16 @@ public class Index {
 	 * @param pairs
 	 * @return
 	 */
-	private Hashtable<String,PostingsList> combinePostings(ArrayList<docEntry> pairs){
+	private Hashtable<String,HighLowList> combinePostings(ArrayList<docEntry> pairs){
 		// stable sort the pairs by term
 		Collections.sort(pairs);
 
 		// create the actual postings list
-		Hashtable<String,PostingsList> finalIndex = new Hashtable<String,PostingsList>();
+		Hashtable<String,HighLowList> finalIndex = new Hashtable<String,HighLowList>();
 
 		String prevTerm = "";
 		int prevDocID = -1;
-		PostingsList currentList = null;
+		HighLowList currentList = null;
 		
 		// go through the sorted pairs of docEnty's (i.e.docId, Token) and create the postings
 		// lists
@@ -196,7 +197,7 @@ public class Index {
 				}
 
 				prevTerm = entry.getToken();
-				currentList = new PostingsList();
+				currentList = new HighLowList();
 				currentList.addDoc(entry.getDocID());
 			}else if( entry.getDocID() != prevDocID ){
 				// add another docID to the postings list
@@ -222,7 +223,7 @@ public class Index {
 	 * @param lengthModifier
 	 */
 	private void normalizeIndex(TERM_MODIFIER termModifier, DOC_MODIFIER docModifier, 
-			LENGTH_MODIFIER lengthModifier){
+			LENGTH_MODIFIER lengthModifier, int k){
 		// first, do term normalization
 		if( termModifier.equals(TERM_MODIFIER.l) ){
 			for( String term: index.keySet() ){
@@ -259,6 +260,11 @@ public class Index {
 			for( String term: index.keySet() ){
 				index.get(term).genericWeight(docLengths);
 			}
+		}
+		
+		// finally, split into high-low lists
+		for ( String term : index.keySet() ) {
+			index.get(term).split(k);
 		}
 	}
 
