@@ -1,5 +1,8 @@
 package search;
 
+import java.util.Iterator;
+import java.util.TreeSet;
+
 /**
  * an implementation of postings list based on a singly linked list
  * 
@@ -40,6 +43,81 @@ public class PostingsList implements QueryResult {
 		occurrences++;
 	}
 
+	// method for adding a custom node, needed for highLow lists
+	public void addNode(Node node) {
+		if (head == null){
+			head = new Node( node.docID(), node.weight() );
+			tail = head;
+		} else{
+			tail.setNext( new Node( node.docID(), node.weight() ) );
+			tail = tail.next();
+		}
+		
+		occurrences++;
+	}
+	
+	// High-low functions
+	//----------------------------------------------------------------
+	
+	/**
+	 * return top k documents in PostingsList
+	 */
+	public PostingsList getTopK(int k) {
+		PostingsList result = new PostingsList();
+		
+		TreeSet<Node> topK = new TreeSet<Node>();
+		
+		Node current = head;
+		
+		while( current != null ){
+			if(topK.size() < k) {
+				topK.add(current);
+			}
+			else if(current.weight() > topK.first().weight()) {
+				topK.pollFirst();
+				topK.add(current);				
+			}
+			current = current.next();
+		}
+		System.out.println("raw has " + occurrences);
+		System.out.println("Size of tree is" + topK.size());
+		Iterator<Node> topKiterator = topK.iterator();
+		
+		while (topKiterator.hasNext()) {
+			current = topKiterator.next();
+			result.addNode(current);
+			System.out.println(current.toString());
+		}
+		
+		return result;
+	}
+	
+	public PostingsList removeList(PostingsList toRemove) {
+		
+		int[] toRemoveIds = new int[toRemove.size()];
+		toRemoveIds = toRemove.getIDs();
+		
+		PostingsList result = new PostingsList();
+		
+		Node current = head;
+		
+		while(current != null) {
+			boolean addToList = true;
+			for(int i = 0; i < toRemoveIds.length; i++) {
+				if (toRemoveIds[i] == current.docID()) {
+					addToList = false;
+				}
+			
+			}
+			if(addToList) {
+				result.addNode(current);
+			}
+			current = current.next();
+		}
+		
+		return result;
+	}
+	
 	// Normalization functions
 	// ---------------------------------------------------------------
 	/**
@@ -370,7 +448,7 @@ public class PostingsList implements QueryResult {
 	 * @author dkauchak
 	 * 
 	 */
-	private class Node {
+	private class Node  implements Comparable<Node> {
 		private Node next = null;
 		private int docID;
 		private double weight;
@@ -402,6 +480,18 @@ public class PostingsList implements QueryResult {
 
 		public String toString() {
 			return docID + ":" + weight;
+		}
+		
+		public int compareTo(Node other) {
+			
+			double difference =  this.weight() - other.weight();
+			if ( difference > 0) {
+				return 1;
+			} else if ( difference < 0) {
+				return -1;
+			} else {
+				return this.docID() - other.docID();
+			}
 		}
 	}
 }
