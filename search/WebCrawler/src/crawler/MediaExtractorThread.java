@@ -9,19 +9,20 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
-public class PSuckerThread extends ControllableThread {
+public class MediaExtractorThread extends ControllableThread {
 	public void process(Object o) {
 		try {
 			URL pageURL = (URL) o;
  
-			saveImageAndVideoMedia(pageURL);
+			saveMedia(pageURL);
 
  			String mimetype = pageURL.openConnection().getContentType();
             if (!mimetype.startsWith("text")) return;
 
 			Vector links = getLinks(pageURL);
 
-			getPageText(pageURL);
+			DocumentWriter documentWriter = new DocumentWriter(bufferedWriter);
+			documentWriter.getPageText(pageURL);
 
 			addLinksToQueue(pageURL, links);
 			
@@ -31,18 +32,11 @@ public class PSuckerThread extends ControllableThread {
 		}
 	}
 
-	private void saveImageAndVideoMedia(URL pageURL) {
+	private void saveMedia(URL pageURL) {
 		String filename = pageURL.getFile().toLowerCase();
-		if (filename.endsWith(".jpg") ||
-			filename.endsWith(".jpeg")||
-			filename.endsWith(".mpeg")||
-			filename.endsWith(".mpg") ||
-			filename.endsWith(".avi") ||
-			filename.endsWith(".wmv")) {
-			filename = filename.replace('/', '-');
-			filename = ((URLQueue) queue).getFilenamePrefix() +
-				pageURL.getHost() + filename;
-			System.out.println("Saving to file " + filename);
+
+		if (isImageFile(filename) || isMovieFile(filename) || isAudioFile(filename)) {
+			filename = prepareFileName(pageURL, filename);			
 			try {
 				SaveURL.writeURLtoFile(pageURL, filename);
 			} catch (Exception e) {
@@ -50,6 +44,35 @@ public class PSuckerThread extends ControllableThread {
 			}
 			return;
 		}
+	}
+	
+	private boolean isAudioFile(String filename) {
+		return filename.endsWith(".mp3")||
+				filename.endsWith(".wma") ||
+				filename.endsWith(".wav");
+	}
+
+	private String prepareFileName(URL pageURL, String filename) {
+		filename = filename.replace('/', '-');
+		filename = ((URLQueue) queue).getFilenamePrefix() +
+			pageURL.getHost() + filename;
+		System.out.println("Saving to file " + filename);
+		return filename;
+	}
+
+	private boolean isMovieFile(String filename) {
+		return filename.endsWith(".mpeg")||
+				filename.endsWith(".mpg") ||
+				filename.endsWith(".avi") ||
+				filename.endsWith(".wmv");
+	}
+
+	private boolean isImageFile(String filename) {
+		return filename.endsWith(".jpg") ||
+			filename.endsWith(".jpeg") ||
+			filename.endsWith(".png") ||
+			filename.endsWith(".tiff") ||
+			filename.endsWith(".gif");
 	}
 
 	private void addLinksToQueue(URL pageURL, Vector links) {		
@@ -75,29 +98,5 @@ public class PSuckerThread extends ControllableThread {
 		return links;
 	}
 	
-	private void getPageText(URL pageURL) throws IOException {
 
-		Document doc = Jsoup.connect(pageURL.toString()).get();
-		Connection hello = Jsoup.connect(pageURL.toString());
-		
-		
-		
-		String pageTitle = doc.title();
-		String pageText = doc.text().toLowerCase();
-		
-        bufferedWriter.write(getFormattedDocument(pageURL, pageTitle, pageText));
-	}
-
-	private String getFormattedDocument(URL pageURL, String pageTitle,
-			String pageText) {
-		return "<URL>" 	+
-		pageURL 	+
-		"</URL>\r\n"	+
-		"<TITLE>"	+
-		pageTitle	+
-		"</TITLE>\r\n"	+
-		"<PAGE>\r\n" +
-		pageText+
-		"\r\n</PAGE>\r\n";
-	}
 }
