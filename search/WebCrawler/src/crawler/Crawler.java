@@ -5,7 +5,7 @@ import java.net.*;
 public class Crawler implements MessageReceiver {
 	public Crawler(Queue q, int maxLevel, int maxThreads)
 		throws InstantiationException, IllegalAccessException {
-		ThreadController tc = new ThreadController(PSuckerThread.class,
+		ThreadController tc = new ThreadController(MediaExtractorThread.class,
 												   maxThreads,
 												   maxLevel,
 												   q,
