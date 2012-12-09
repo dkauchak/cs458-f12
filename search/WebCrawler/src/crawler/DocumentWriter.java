@@ -4,7 +4,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.net.URL;
 
-import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -18,7 +17,6 @@ public class DocumentWriter {
 	public void getPageText(URL pageURL) throws IOException {
 
 		Document doc = Jsoup.connect(pageURL.toString()).get();
-		Connection hello = Jsoup.connect(pageURL.toString());
 		
 		String pageTitle = doc.title();
 		String pageText = doc.text().toLowerCase();
