@@ -3,6 +3,7 @@ package crawler;
 import java.net.*;
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 public class SaveURL
 {
@@ -43,19 +44,19 @@ public class SaveURL
 		os.close();
 	}
 
-	public static Vector extractLinks(URL url)
+	public static Vector<String> extractLinks(URL url)
 		throws IOException {
 		return extractLinks(getURL(url));
 	}
 
-	public static Map extractLinksWithText(URL url)
+	public static Map<String, String> extractLinksWithText(URL url)
 		throws IOException {
 		return extractLinksWithText(getURL(url));
 	}
 
-    public static Vector extractLinks(String rawPage, String page) {
+    public static Vector<String> extractLinks(String rawPage, String page) {
 		int index = 0;
-		Vector links = new Vector();
+		Vector<String> links = new Vector<String>();
 		while ((index = page.indexOf("<a ", index)) != -1)
 		{
 		    if ((index = page.indexOf("href", index)) == -1) break;
@@ -71,9 +72,9 @@ public class SaveURL
     }
 
 
-	public static Map extractLinksWithText(String rawPage, String page) {
+	public static Map<String, String> extractLinksWithText(String rawPage, String page) {
 		int index = 0;
-		Map links = new HashMap();
+		Map<String, String> links = new HashMap<String, String>();
 		while ((index = page.indexOf("<a ", index)) != -1)
 		{
 			int tagEnd = page.indexOf(">", index);
@@ -95,11 +96,11 @@ public class SaveURL
 		
 	}
     
-	public static Vector extractLinks(String rawPage) {
+	public static Vector<String> extractLinks(String rawPage) {
         return extractLinks(rawPage, rawPage.toLowerCase().replaceAll("\\s", " "));
 	}
 
-	public static Map extractLinksWithText(String rawPage) {
+	public static Map<String, String> extractLinksWithText(String rawPage) {
         return extractLinksWithText(rawPage, rawPage.toLowerCase().replaceAll("\\s", " "));
 	}
 
@@ -113,10 +114,10 @@ public class SaveURL
 // 				for (int n = 0; n < links.size(); n++) {
 // 					System.out.println((String) links.elementAt(n));
 // 				}
-				Set links = extractLinksWithText(url).entrySet();
-				Iterator it = links.iterator();
+				Set<Entry<String,String>> links = extractLinksWithText(url).entrySet();
+				Iterator<Entry<String, String>> it = links.iterator();
 				while (it.hasNext()) {
-					Map.Entry en = (Map.Entry) it.next();
+					Entry<String, String> en = it.next();
 					String strLink = (String) en.getKey();
 					String strText = (String) en.getValue();
 					System.out.println(strLink + " \"" + strText + "\" ");

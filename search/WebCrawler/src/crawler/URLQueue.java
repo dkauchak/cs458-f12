@@ -5,10 +5,10 @@ import java.util.*;
 
 public class URLQueue implements threads.Queue {
 
-	LinkedList evenQueue;
-	LinkedList oddQueue;
-	Set gatheredLinks;
-	Set processedLinks;
+	LinkedList<String> evenQueue;
+	LinkedList<String> oddQueue;
+	Set<String> gatheredLinks;
+	Set<String> processedLinks;
 
 	/**
 	 * Maximum number of elements allowed in the gatheredLinks set
@@ -22,19 +22,19 @@ public class URLQueue implements threads.Queue {
 	String filenamePrefix;
 
 	public URLQueue() {
-		evenQueue = new LinkedList();
-		oddQueue = new LinkedList();
-		gatheredLinks = new HashSet();
-		processedLinks = new HashSet();
+		evenQueue = new LinkedList<String>();
+		oddQueue = new LinkedList<String>();
+		gatheredLinks = new HashSet<String>();
+		processedLinks = new HashSet<String>();
 		maxElements = -1;
 		filenamePrefix = "";
 	}
 
 	public URLQueue(int _maxElements, String _filenamePrefix) {
-		evenQueue = new LinkedList();
-		oddQueue = new LinkedList();
-		gatheredLinks = new HashSet();
-		processedLinks = new HashSet();
+		evenQueue = new LinkedList<String>();
+		oddQueue = new LinkedList<String>();
+		gatheredLinks = new HashSet<String>();
+		processedLinks = new HashSet<String>();
 		maxElements = _maxElements;
 		filenamePrefix = _filenamePrefix;
 	}
@@ -51,11 +51,11 @@ public class URLQueue implements threads.Queue {
 		maxElements = _maxElements;
 	}
 
-	public Set getGatheredElements() {
+	public Set<String> getGatheredElements() {
 		return gatheredLinks;
 	}
 
-	public Set getProcessedElements() {
+	public Set<String> getProcessedElements() {
 		return processedLinks;
 	}
 
