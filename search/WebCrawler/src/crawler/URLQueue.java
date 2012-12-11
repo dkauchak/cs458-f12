@@ -95,14 +95,14 @@ public class URLQueue implements threads.Queue {
 		}
 		try {
 			URL url = new URL(s);
-//			if (hasSufficientTimePassed(url.getHost())){
+			if (hasSufficientTimePassed(url.getHost())){
 				domainTimeAccessedLookup.put(url.getHost(), System.currentTimeMillis());
 				processedLinks.add(s);
 				return url;
-//			}
+			}
 			
-//			addToQueue(url.toString(), level);
-//			return pop(level);
+			addToQueue(url.toString(), level);
+			return pop(level);
 		} catch (MalformedURLException e) {
 			return null;
 		}
