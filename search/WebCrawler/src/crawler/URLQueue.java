@@ -9,6 +9,7 @@ public class URLQueue implements threads.Queue {
 	LinkedList<String> oddQueue;
 	Set<String> gatheredLinks;
 	Set<String> processedLinks;
+	private HashMap<String, Long> domainTimeAccessedLookup;
 
 	/**
 	 * Maximum number of elements allowed in the gatheredLinks set
@@ -27,6 +28,7 @@ public class URLQueue implements threads.Queue {
 		gatheredLinks = new HashSet<String>();
 		processedLinks = new HashSet<String>();
 		maxElements = -1;
+		domainTimeAccessedLookup = new HashMap<String, Long>();
 		filenamePrefix = "";
 	}
 
@@ -36,6 +38,7 @@ public class URLQueue implements threads.Queue {
 		gatheredLinks = new HashSet<String>();
 		processedLinks = new HashSet<String>();
 		maxElements = _maxElements;
+		domainTimeAccessedLookup = new HashMap<String, Long>();
 		filenamePrefix = _filenamePrefix;
 	}
 
@@ -77,8 +80,6 @@ public class URLQueue implements threads.Queue {
 
 	public synchronized Object pop(int level) {
 		String s;
-		// try to get element from the appropriate queue
-		// is the queue is empty, return null
 		if (level % 2 == 0) {
 			if (evenQueue.size() == 0) {
 				return null;
@@ -92,15 +93,27 @@ public class URLQueue implements threads.Queue {
 				s = (String) oddQueue.removeFirst();
 			}
 		}
-		// convert the string to a url and add to the set of processed links
 		try {
 			URL url = new URL(s);
-			processedLinks.add(s);
-			return url;
+//			if (hasSufficientTimePassed(url.getHost())){
+				domainTimeAccessedLookup.put(url.getHost(), System.currentTimeMillis());
+				processedLinks.add(s);
+				return url;
+//			}
+			
+//			addToQueue(url.toString(), level);
+//			return pop(level);
 		} catch (MalformedURLException e) {
-			// shouldn't happen, as only URLs can be pushed
 			return null;
 		}
+	}
+
+	private boolean hasSufficientTimePassed(String host) {
+		if (domainTimeAccessedLookup.get(host) == null)
+			return true;
+		if (System.currentTimeMillis() - domainTimeAccessedLookup.get(host) >= 1000)
+			return true;
+		return false;
 	}
 
 	public synchronized boolean push(Object url, int level) {
@@ -110,15 +123,19 @@ public class URLQueue implements threads.Queue {
 		String s = ((URL) url).toString();
 		if (gatheredLinks.add(s)) {
 			// has not been in set yet, so add to the appropriate queue
-			if (level % 2 == 0) {
-				evenQueue.addLast(s);
-			} else {
-				oddQueue.addLast(s);
-			}
+			addToQueue(s, level);
 			return true;
 		} else {
 			// this link has already been gathered
 			return false;
+		}
+	}
+
+	private void addToQueue(String s, int level) {
+		if (level % 2 == 0) {
+			evenQueue.addLast(s);
+		} else {
+			oddQueue.addLast(s);
 		}
 	}
 
