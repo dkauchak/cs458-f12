@@ -5,10 +5,6 @@ import java.net.*;
 import java.io.*;
 import java.util.Vector;
 
-import org.jsoup.Connection;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-
 public class MediaExtractorThread extends ControllableThread {
 	public void process(Object o) {
 		try {
@@ -19,7 +15,7 @@ public class MediaExtractorThread extends ControllableThread {
  			String mimetype = pageURL.openConnection().getContentType();
             if (!mimetype.startsWith("text")) return;
 
-			Vector links = getLinks(pageURL);
+			Vector<String> links = getLinks(pageURL);
 
 			DocumentWriter documentWriter = new DocumentWriter(bufferedWriter);
 			documentWriter.getPageText(pageURL);
@@ -75,7 +71,7 @@ public class MediaExtractorThread extends ControllableThread {
 			filename.endsWith(".gif");
 	}
 
-	private void addLinksToQueue(URL pageURL, Vector links) {		
+	private void addLinksToQueue(URL pageURL, Vector<String> links) {		
 		for (int n = 0; n < links.size(); n++) {
 			try {
 				URL link = new URL(pageURL,
@@ -89,12 +85,17 @@ public class MediaExtractorThread extends ControllableThread {
 		}
 	}
 
-	private Vector getLinks(URL pageURL) throws IOException {
+	private Vector<String> getLinks(URL pageURL) throws IOException {
 		String rawPage = SaveURL.getURL(pageURL);
 		
 		String smallPage = rawPage.toLowerCase().replaceAll("\\s", " ");
 
-		Vector links = SaveURL.extractLinks(rawPage, smallPage);
+		Vector<String> links = null;
+		
+    	if (Robots.isRobotSafe(pageURL)){
+    		links = SaveURL.extractLinks(rawPage, smallPage);
+    	}
+
 		return links;
 	}
 	
