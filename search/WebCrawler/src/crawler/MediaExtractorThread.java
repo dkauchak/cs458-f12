@@ -90,7 +90,12 @@ public class MediaExtractorThread extends ControllableThread {
 		
 		String smallPage = rawPage.toLowerCase().replaceAll("\\s", " ");
 
-		Vector<String> links = SaveURL.extractLinks(rawPage, smallPage);
+		Vector<String> links = null;
+		
+    	if (Robots.isRobotSafe(pageURL)){
+    		links = SaveURL.extractLinks(rawPage, smallPage);
+    	}
+
 		return links;
 	}
 	
