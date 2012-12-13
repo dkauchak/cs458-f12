@@ -79,8 +79,6 @@ public class PostingsList implements QueryResult {
 			}
 			current = current.next();
 		}
-		System.out.println("raw has " + occurrences);
-		System.out.println("Size of tree is" + topK.size());
 		Iterator<Node> topKiterator = topK.iterator();
 		
 		while (topKiterator.hasNext()) {
