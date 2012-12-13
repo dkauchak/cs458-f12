@@ -12,17 +12,15 @@ public class AudioQuery {
 
 	private ArrayList<Double> bands;
 
-	public AudioQuery(ArrayList<Integer> frames) {
-		bands = AudioProcessor.getBands(frames);
+	public AudioQuery(ArrayList<Integer> frames, AudioProcessor processor) {
+		bands = processor.getBands(frames);
 	}
 
-	public AudioQuery(File file) throws IOException, UnsupportedAudioFileException {
-		this(AudioReader.readAudio(file));
+	public AudioQuery(File file, AudioProcessor processor) throws IOException,
+			UnsupportedAudioFileException {
+		this(AudioReader.readAudio(file), processor);
 	}
-
-	/**
-	 * @return the words in the query
-	 */
+	
 	public ArrayList<Double> getBands() {
 		return bands;
 	}

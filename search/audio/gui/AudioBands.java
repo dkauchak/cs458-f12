@@ -20,10 +20,11 @@ public class AudioBands extends JFrame {
 			System.err.println("usage: java AudioBands <audiodir>");
 		else {
 			AudioReader reader = new AudioReader(args[0]);
+			AudioProcessor processor = new AudioProcessor();
 			while (reader.hasNext()) {
 				AudioDocument doc = reader.next();
 				if (doc != null) {
-					AudioBands gui = new AudioBands(AudioProcessor.getBands(doc
+					AudioBands gui = new AudioBands(processor.getBands(doc
 							.getFrames()), doc.getDocID());
 					gui.setVisible(true);
 				}

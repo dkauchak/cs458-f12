@@ -13,6 +13,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import search.audio.AudioDocument;
+import search.audio.AudioProcessor;
 
 public class AudioReader {
 
@@ -33,6 +34,8 @@ public class AudioReader {
 
 	public static ArrayList<Integer> readAudio(File audioFile)
 			throws IOException, UnsupportedAudioFileException {
+		if (!AudioProcessor.checkFileFormat(audioFile))
+			throw new UnsupportedAudioFileException();
 		AudioInputStream audioIn = AudioSystem.getAudioInputStream(audioFile);
 		AudioFormat format = audioIn.getFormat();
 		boolean stereo = format.getChannels() != 1;
@@ -53,6 +56,7 @@ public class AudioReader {
 			frames.add(frame);
 		}
 		return frames;
+
 	}
 
 	public AudioDocument next() {
@@ -80,8 +84,8 @@ public class AudioReader {
 		filePtr = 0;
 	}
 
-	public static boolean isValidFile(File file) {
-		return false;
+	public int numFiles() {
+		return files.length;
 	}
 
 	protected class AudioIDPair {
