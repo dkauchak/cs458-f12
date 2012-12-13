@@ -83,8 +83,7 @@ public class PostingsList implements QueryResult {
 		
 		while (topKiterator.hasNext()) {
 			current = topKiterator.next();
-			result.addNode(current);
-			System.out.println(current.toString());
+			result.addNode(current);;
 		}
 		
 		return result;
