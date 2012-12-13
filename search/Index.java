@@ -18,7 +18,7 @@ public class Index {
 	public static enum TERM_MODIFIER {n, l, b};
 	public static enum DOC_MODIFIER {n, t};
 	public static enum LENGTH_MODIFIER {n, c};
-	public static int highListSize = 50;
+	public static int highListSize = 40;
 	
 	private int maxDocID;
 	private Hashtable<String,HighLowList> index;
