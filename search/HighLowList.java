@@ -50,7 +50,6 @@ public class HighLowList {
 	
 	public void split(int k) {
 		high = raw.getTopK(k);
-		System.out.println("size of high list is" + high.size());
 		low = raw.removeList(high);
 	}
 	
