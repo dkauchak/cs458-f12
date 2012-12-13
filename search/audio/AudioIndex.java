@@ -16,16 +16,17 @@ public class AudioIndex {
 	private int maxDocID;
 	private ArrayList<PostingsList> index;
 
-	public AudioIndex(AudioReader reader, LENGTH_MODIFIER lengthModifier) {
+	public AudioIndex(AudioReader reader, AudioProcessor processor,
+			LENGTH_MODIFIER lengthModifier) {
 
-		index = createIndex(reader);
+		index = createIndex(reader, processor);
 		normalizeIndex(lengthModifier);
 	}
 
 	public VectorResult rankedQuery(AudioQuery query) {
 		Accumulator acc = new Accumulator();
 
-		for (int i=0; i < index.size(); ++i) {
+		for (int i = 0; i < index.size(); ++i) {
 			if (index.get(i) != null) {
 				index.get(i).addToResult(acc, query.getBands().get(i));
 			}
@@ -34,28 +35,37 @@ public class AudioIndex {
 		return acc.getResults();
 	}
 
-	private ArrayList<PostingsList> createIndex(AudioReader reader){
+	private ArrayList<PostingsList> createIndex(AudioReader reader,
+			AudioProcessor processor) {
 		ArrayList<PostingsList> index = new ArrayList<PostingsList>();
-		
+
+		System.out.println("|---------- Constructing Index ----------|");
+		System.out.print("|");
+
+		int numFiles = reader.numFiles();
+		double acc = 0;
 		while (reader.hasNext()) {
 			AudioDocument doc = reader.next();
 			int docID = doc.getDocID();
-			ArrayList<Double> bands = AudioProcessor.getBands(doc.getFrames());
+			ArrayList<Double> bands = processor.getBands(doc.getFrames());
 
-			for (int i=0; i< bands.size(); ++i) {
+			for (int i = 0; i < bands.size(); ++i) {
 				if (index.size() <= i || index.get(i) == null)
 					index.add(i, new PostingsList());
 				index.get(i).addDoc(docID, bands.get(i));
 			}
 
-			if (docID % 100 == 0) {
-				System.out.println(docID);
+			++acc;
+			while (acc > numFiles / 40.0) {
+				System.out.print("#");
+				acc -= numFiles / 40.0;
 			}
 
 			if (docID > maxDocID) {
 				maxDocID = docID;
 			}
 		}
+		System.out.println("|");
 		return index;
 	}
 
