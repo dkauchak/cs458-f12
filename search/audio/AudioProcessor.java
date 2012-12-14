@@ -33,28 +33,45 @@ public class AudioProcessor {
 		return false;
 	}
 
-	public final static int MAX_FREQ = 10000;
-	public final static int MIN_FREQ = 20;
-	public final static int NUM_BANDS = 500;
+	private ArrayList<ArrayList<Double>> filters;
 
-	private static ArrayList<Double> getFilter(int freq) {
-		int filterSize = SAMPLE_RATE / freq;
+	public AudioProcessor(int minFreq, int maxFreq, int numBands, int numOsc) {
+		// pre-compute the necessary convolution filters
+		filters = new ArrayList<ArrayList<Double>>(numBands);
+		for (int i = 0; i < numBands; ++i) {
+			// calculate the frequency of the band to be examined
+			int freq = minFreq
+					+ (int) ((maxFreq - minFreq) * (Math.log(numBands
+							/ (double) (numBands - i)) / Math.log(numBands)));
+			// build a filter for that frequency
+			ArrayList<Double> filter = getFilter(freq, numOsc);
+			filters.add(filter);
+		}
+	}
+
+	public static final int MIN_FREQ = 20;
+	public static final int MAX_FREQ = 3000;
+	public static final int NUM_BANDS = 50;
+	public static final int NUM_OSC = 5;
+
+	public AudioProcessor() {
+		this(MIN_FREQ, MAX_FREQ, NUM_BANDS, NUM_OSC);
+	}
+
+	private ArrayList<Double> getFilter(int freq, int numOsc) {
+		int filterSize = SAMPLE_RATE / freq * numOsc;
 		ArrayList<Double> filter = new ArrayList<Double>(filterSize);
 		for (int i = 0; i < filterSize; ++i)
-			filter.add(i, Math.sin(Math.PI / filterSize * i));
+			filter.add(i, Math.sin(2 * Math.PI * numOsc / filterSize * i));
 		return filter;
 	}
 
-	public static ArrayList<Double> getBands(ArrayList<Integer> frames) {
-		ArrayList<Double> ret = new ArrayList<Double>(NUM_BANDS);
+	public ArrayList<Double> getBands(ArrayList<Integer> frames) {
+		ArrayList<Double> ret = new ArrayList<Double>(filters.size());
 		// iterate through all bands
-		for (int i = 0; i < NUM_BANDS; ++i) {
-			// calculate the frequency of the band to be examined
-			int freq = MIN_FREQ
-					+ (int) ((MAX_FREQ - MIN_FREQ) * (Math.log(NUM_BANDS
-							/ (double) (NUM_BANDS - i)) / Math.log(NUM_BANDS)));
-			// build a filter for that frequency
-			ArrayList<Double> filter = getFilter(freq);
+		for (int i = 0; i < filters.size(); ++i) {
+			// get a filter for that band
+			ArrayList<Double> filter = filters.get(i);
 			// convolve that filter with the input audio data
 			double result = 0;
 			for (int k = 0; k < frames.size() - filter.size(); ++k) {
