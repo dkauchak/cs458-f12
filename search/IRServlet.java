@@ -17,17 +17,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/Results")
 public class IRServlet extends HttpServlet {
 
-  private static final long serialVersionUID = 1L;
+  	private static final long serialVersionUID = 1L;
 	Processor processor;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public IRServlet() {
-
 		super();
 		processor = new Processor();
-
 	}
 
 	/**
