@@ -45,28 +45,28 @@ public class IRServlet extends HttpServlet {
 		StringBuilder html = new StringBuilder();
 		
 		html = html.append("<html>")
-				   .append("<head>")
-				   .append("<link rel=\"stylesheet\" type=\"text/css\" href=\"http://fonts.googleapis.com/css?family=Rancho|Inconsolata|Coming+Soon\">")
-				   .append("<div id=\"wrapper\">")
-				   .append("<h1 id= \"logo\">")
-				   .append("Treasure Map")
-				   .append("</h1>")
-				   .append("</div>")
-				   .append("<table>")
-				   .append("<tr>")
-				   .append("<td>")
-				   .append("<div id=\"parent\">")
-				   .append("<div id=\"child\">")
-				   .append("<link href=\"Results.css\" rel=\"stylesheet\">")
-				   .append("<form method= \"POST\" id=\"searchbox\" action=\"http://XXX.XXX.XXX.XXX:XXXX/Engine/Results\">")
-				   .append("<input id=\"search\" type=\"text\" placeholder=\"Type here\" name=\"query\">")
-				   .append("<input id=\"submit\" type=\"submit\" value=\"Search\">")
-				   .append("</form>")
-				   .append("</div>")
-				   .append("</div>")
-				   .append("</td>")
-				   .append("</tr>")
-				   .append("</table>");
+		           .append("<head>")
+		           .append("<link rel=\"stylesheet\" type=\"text/css\" href=\"http://fonts.googleapis.com/css?family=Rancho|Inconsolata|Coming+Soon\">")
+		           .append("<div id=\"wrapper\">")
+		           .append("<h1 id= \"logo\">")
+			   .append("Treasure Map")
+		           .append("</h1>")
+			   .append("</div>")
+			   .append("<table>")
+		           .append("<tr>")
+		           .append("<td>")
+			   .append("<div id=\"parent\">")
+		           .append("<div id=\"child\">")
+		           .append("<link href=\"Results.css\" rel=\"stylesheet\">")
+			   .append("<form method= \"POST\" id=\"searchbox\" action=\"http://XXX.XXX.XXX.XXX:XXXX/Engine/Results\">")
+			   .append("<input id=\"search\" type=\"text\" placeholder=\"Type here\" name=\"query\">")
+		           .append("<input id=\"submit\" type=\"submit\" value=\"Search\">")
+			   .append("</form>")
+		           .append("</div>")
+			   .append("</div>")
+			   .append("</td>")
+			   .append("</tr>")
+		           .append("</table>");
 		
 		if(!results.isEmpty()) {
 			for (WebResultData w : results) {
@@ -86,25 +86,25 @@ public class IRServlet extends HttpServlet {
 				snippet = snippet.append(" ...");
 				
 				html = html.append("<div id=\"cover\">")
-						   .append("<h2 id= \"result\">")
-						   .append("<a href=\"" + url +"\">" + title + "</a>")
-						   .append("</h2>")
-						   .append("<h3>")
-						   .append(url)
-						   .append("</h3>")
-						   .append("<h4>")
-						   .append(snippet.toString())
-						   .append("</h4>")
-						   .append("</div>");
+				           .append("<h2>")
+					   .append("<a href=\"" + url +"\">" + title + "</a>")
+					   .append("</h2>")
+					   .append("<h3>")
+					   .append(url)
+					   .append("</h3>")
+					   .append("<h4>")
+				           .append(snippet.toString())
+					   .append("</h4>")
+					   .append("</div>");
 			}
 		} else {
 			html = html.append("<div id=\"cover\">")
-					   .append("<h2 id= \"result\">")
-					   .append("<center>")
-					   .append("Sorry, No Results Found.")
-					   .append("<center>")
-					   .append("</h2>")
-					   .append("</div>");
+			           .append("<h2>")
+				   .append("<center>")
+				   .append("Sorry, No Results Found.")
+				   .append("<center>")
+				   .append("</h2>")
+				   .append("</div>");
 		}
 		
 		html.append("<div id=\"footer\">");
