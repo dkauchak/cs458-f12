@@ -1,0 +1,170 @@
+html, body 
+{ 
+    height: 100%; 
+}
+
+table
+{ 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a 
+{ 
+    text-decoration: none; 
+}
+
+#parent 
+{
+    padding: 5% 0;
+}
+
+#child 
+{
+    padding: 5% 0;
+}
+
+#wrapper
+{
+    top:50px;
+    left:0px;
+    width:300px;
+    height:200px;
+    position:relative;
+    text-align:center;
+    margin:auto;
+}
+
+#wrapper h1
+{
+    font-family: 'Rancho'; font-size: 80px; font-style: normal; font-weight: 400;
+    margin:auto;
+    line-height:100px;
+    vertical-align:middle;
+    color: #CDBE70;
+}
+
+hr.style-one 
+{
+    border: 0;
+    height: 1px;
+    top: 0;
+    background: #333;
+    background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc); 
+    background-image:      -o-linear-gradient(left, #ccc, #333, #ccc); 
+}
+
+h2 
+{
+   font-family: 'Coming Soon';
+   font-size: 14px;
+   float: left
+}
+
+#header 
+{
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 40px;
+	position: relative;
+	text-align: left;
+	margin: auto;
+	font-family: 'Inconsolata';
+}
+
+#footer 
+{
+	top: 35%;
+	left: 0px;
+	width: 100%;
+	height: 50px;
+	position: relative;
+	text-align: left;
+	margin: auto;
+	font-family: 'Inconsolata';
+}
+
+/* The CSS for the search bar is from: "http://www.red-team-design.com/how-to-create-a-cool-and-usable-css3-search-box" */
+
+#search, #submit
+{
+  float: left;
+}
+
+#search
+{
+  padding: 5px 9px;
+  height: 30px;
+  width: 575px;
+  border: 1px solid #a4c3ca;
+  /*font: normal 13px 'trebuchet MS', arial, helvetica;*/
+  font-family: 'Coming Soon';
+  font-weight: 600;
+  font-size: 14px;
+  background: #f1f1f1;
+  
+  -moz-border-radius: 50px 3px 3px 50px;
+   border-radius: 3px 3px 3px 3px;
+   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);
+   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);
+   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);            
+}
+
+/* ----------------------- */
+
+#submit
+{    
+  background: #6cbb6b;
+  background-image: -moz-linear-gradient(#95d788, #6cbb6b);
+  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #6cbb6b),color-stop(1, #95d788));
+  
+  -moz-border-radius: 3px 50px 50px 3px;
+  border-radius: 3px 3px 3px 3px;
+  
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7eba7c #578e57 #447d43;
+  
+   -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+   -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
+   box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3) inset;       
+
+  height: 30px;
+  margin: 0 0 0 10px;
+        padding: 0;
+  width: 90px;
+  cursor: pointer;
+  /* font: bold 14px Arial, Helvetica; */
+  font-family: 'Coming Soon';
+  font-weight: 600;
+  font-size: 14px
+  color: #23441e;
+  
+  text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+}
+
+#submit:hover
+{    
+  background: #95d788;
+  background-image: -moz-linear-gradient(#6cbb6b, #95d788);
+  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #95d788),color-stop(1, #6cbb6b));
+}  
+
+#submit:active
+{    
+  background: #95d788;
+  outline: none;
+   
+   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;    
+}
+
+#submit::-moz-focus-inner
+{
+       border: 0;  /* Small centering fix for Firefox */
+}
+​
