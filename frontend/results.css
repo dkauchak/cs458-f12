@@ -1,0 +1,197 @@
+@CHARSET "UTF-8";
+
+html, body 
+{ 
+  height: 100%; 
+}
+
+table 
+{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a 
+{ 
+	text-decoration: none; 
+}
+
+#parent 
+{ 
+	padding: 1% 0; 
+}
+
+#child 
+{ 
+	padding: 1% 0; 
+}
+
+#wrapper 
+{
+	color: #CDBE70;
+	height: 94px;
+	left: 0px;
+	margin: auto;
+	position: relative;
+	text-align: center;
+	top: 0px;
+	width: 500px;
+}
+
+#cover 
+{
+	height: 125px;
+	left: 0px;
+	margin: auto;
+	position: relative;
+	text-align: left;
+	top: 10px;
+	width: 700px;	
+}
+
+#wrapper h1 
+{
+	font-family: 'Rancho';
+	font-size: 80px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 100px;
+	margin: auto;
+	vertical-align: middle;
+}
+
+h2 {
+	font-family: 'Inconsolata';
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 40px;
+	margin: auto;
+	vertical-align: middle;
+}
+
+h3 
+{
+	color: #339900;
+	font-family: 'Inconsolata';
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 20px;
+	margin: auto;
+	vertical-align: middle;
+}
+
+h4 
+{
+	font-family: 'Inconsolata';
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 15px;
+	margin: auto;
+	vertical-align: middle;
+}
+
+#footer 
+{
+	font-family: 'Inconsolata';
+	height: 75px;
+	left: 0px;
+	margin: auto;
+	position: relative;
+	text-align: left;
+	top: 50px;
+	width: 700px;
+	word-spacing: 15px;
+}
+
+hr 
+{
+  background: #333;
+  background-image: -webkit-linear-gradient(left, #ccc, #333, #ccc); 
+  background-image:    -moz-linear-gradient(left, #ccc, #333, #ccc); 
+  background-image:     -ms-linear-gradient(left, #ccc, #333, #ccc); 
+  background-image:      -o-linear-gradient(left, #ccc, #333, #ccc); 
+  border: 0;
+  height: 1px;
+  top: 500px;
+}
+
+/* The following CSS is from: "http://www.red-team-design.com/how-to-create-a-cool-and-usable-css3-search-box" */
+
+#search,#submit 
+{ 
+	float: left; 
+}
+
+#search 
+{
+	padding: 5px 9px;
+	height: 35px;
+	width: 570px;
+	border: 1px solid #a4c3ca;
+	font-family: 'Coming Soon';
+	font-weight: 600;
+	font-size: 14px;
+	background: #f1f1f1;
+	-moz-border-radius: 50px 3px 3px 50px;
+	border-radius: 3px 3px 3px 3px;
+	-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0
+		rgba(255, 255, 255, 1);
+	-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0
+		rgba(255, 255, 255, 1);
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0
+		rgba(255, 255, 255, 1);
+}
+
+#submit 
+{
+	background: #6cbb6b;
+	background-image: -moz-linear-gradient(#95d788, #6cbb6b);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #6cbb6b),
+		color-stop(1, #95d788) );
+	-moz-border-radius: 3px 50px 50px 3px;
+	border-radius: 3px 3px 3px 3px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #7eba7c #578e57 #447d43;
+	-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0
+		rgba(255, 255, 255, 0.3) inset;
+	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0
+		rgba(255, 255, 255, 0.3) inset;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 0 rgba(255, 255, 255, 0.3)
+		inset;
+	height: 35px;
+	margin: 0 0 0 10px;
+	padding: 0;
+	width: 90px;
+	cursor: pointer;
+	font-family: 'Coming Soon';
+	font-weight: 600;
+	font-size: 14px color:  #23441e;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+#submit:hover 
+{
+	background: #95d788;
+	background-image: -moz-linear-gradient(#6cbb6b, #95d788);
+	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #95d788),
+		color-stop(1, #6cbb6b) );
+}
+
+#submit:active 
+{
+	background: #95d788;
+	outline: none;
+	-moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+	-webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+}
+
+#submit::-moz-focus-inner 
+{ 
+	border: 0; 
+}
+​
