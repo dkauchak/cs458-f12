@@ -57,7 +57,7 @@ public class IRServlet extends HttpServlet {
 		           .append("<td>")
 			   .append("<div id=\"parent\">")
 		           .append("<div id=\"child\">")
-		           .append("<link href=\"Results.css\" rel=\"stylesheet\">")
+		           .append("<link href=\"results.css\" rel=\"stylesheet\">")
 			   .append("<form method= \"POST\" id=\"searchbox\" action=\"http://XXX.XXX.XXX.XXX:XXXX/Engine/Results\">")
 			   .append("<input id=\"search\" type=\"text\" placeholder=\"Type here\" name=\"query\">")
 		           .append("<input id=\"submit\" type=\"submit\" value=\"Search\">")
